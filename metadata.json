@@ -1,0 +1,6 @@
+{
+  "name": "Mobster City",
+  "description": "An immersive retro-modern text-based mafia RPG in Portuguese and English. Level up, train your stats, perform street crimes, trade contraband on the black market, and dominate the underworld.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

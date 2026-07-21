@@ -1,0 +1,487 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Rajdhani:wght@500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
+  --font-condensed: "Oswald", sans-serif;
+  --font-rajdhani: "Rajdhani", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --animate-pulse-slow: pulse-slow 3.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 1;
+    filter: drop-shadow(0 0 2px rgba(239, 68, 68, 0.1));
+  }
+  50% {
+    opacity: 0.5;
+    filter: drop-shadow(0 0 8px rgba(239, 68, 68, 0.35));
+  }
+}
+
+body {
+  background: radial-gradient(circle at 50% 0%, #120e11 0%, #050507 70%, #020203 100%);
+  color: #f4f4f5; /* zinc-100 */
+  font-family: var(--font-sans);
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Luxury Cyber CRT / Terminal Scanlines */
+body::after {
+  content: " ";
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.01), rgba(0, 255, 0, 0.005), rgba(0, 0, 255, 0.01));
+  z-index: 9999;
+  background-size: 100% 4px, 6px 100%;
+  pointer-events: none;
+  opacity: 0.22;
+}
+
+/* Beautiful custom scrollbars to maintain the sleek bento vibe */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: #050507;
+}
+::-webkit-scrollbar-thumb {
+  background: #201a1e;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #dc2626;
+  box-shadow: 0 0 10px rgba(220, 38, 38, 0.4);
+}
+
+/* Base style alignments to ensure rich bento-like rounding inherits well */
+.rounded-bento-card {
+  border-radius: 1.5rem; /* rounded-3xl */
+}
+
+@utility animate-fade-in {
+  animation: fadeIn 0.18s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* Custom digital grid texture overlay that turns the app into a board game arena */
+.bg-board-grid {
+  background-size: 36px 36px;
+  background-image: 
+    linear-gradient(to right, rgba(239, 68, 68, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(239, 68, 68, 0.02) 1px, transparent 1px);
+}
+
+@keyframes hudGlowCash {
+  0% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.61);
+  }
+  70% {
+    box-shadow: 0 0 25px 6px rgba(16, 185, 129, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+  }
+}
+
+@keyframes hudGlowLevel {
+  0% {
+    box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.75);
+  }
+  70% {
+    box-shadow: 0 0 35px 12px rgba(245, 158, 11, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(245, 158, 11, 0);
+  }
+}
+
+.animate-glow-cash {
+  animation: hudGlowCash 1.5s ease-out infinite;
+}
+
+.animate-glow-level {
+  animation: hudGlowLevel 1.5s ease-out infinite;
+}
+
+/* 2.5D Isometric City layout with CSS Grid Template Areas */
+.city-grid-dashboard {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "header-bar"
+    "map-canvas"
+    "control-deck";
+  gap: 16px;
+}
+
+@media (min-width: 1150px) {
+  .city-grid-dashboard {
+    grid-template-columns: 1fr 410px;
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+      "header-bar   control-deck"
+      "map-canvas   control-deck";
+    gap: 20px;
+  }
+}
+
+/* --- NIGHT MODE AMBIENT COHESIVE SYSTEM --- */
+
+/* Main layout transition */
+.night-mode-active {
+  background-color: #030308 !important; /* Deeper midnight background */
+  transition: background-color 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.night-mode-inactive {
+  background-color: #070709 !important;
+  transition: background-color 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Adjust top atmospheric glow to match the deep dark indigo of Night Mode */
+.night-mode-active .bg-radial-from-top.from-red-500\/20 {
+  background-image: radial-gradient(ellipse at top, rgba(99, 102, 241, 0.16) 0%, transparent 80%) !important;
+  transition: background-image 0.8s ease;
+}
+
+/* Base grid shift from red-tinted to midnight-indigo-tinted */
+.night-mode-active .bg-board-grid {
+  background-image: 
+    linear-gradient(to right, rgba(99, 102, 241, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(99, 102, 241, 0.02) 1px, transparent 1px) !important;
+  transition: background-image 0.8s ease;
+}
+
+/* Bento Cards Tint Shift */
+.night-mode-active .relative.rounded-3xl.border {
+  background-color: #050510 !important; /* Midnight navy tint */
+  border-color: rgba(99, 102, 241, 0.14) !important; /* Soft indigo border integration */
+  box-shadow: 
+    0 10px 15px -3px rgba(0, 0, 0, 0.65), 
+    0 4px 6px -4px rgba(0, 0, 0, 0.65), 
+    inset 0 0 20px rgba(99, 102, 241, 0.03) !important;
+  transition: background-color 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
+              border-color 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
+              box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Bento Cards Hover State in Night Mode */
+.night-mode-active .relative.rounded-3xl.border:hover {
+  border-color: rgba(99, 102, 241, 0.45) !important; /* Indigo hover feedback */
+  box-shadow: 
+    0 25px 50px -12px rgba(0, 0, 0, 0.85), 
+    0 0 25px rgba(99, 102, 241, 0.16), 
+    inset 0 0 16px rgba(99, 102, 241, 0.06) !important;
+}
+
+/* Cybernetic corner brackets hover shift to indigo */
+.night-mode-active .relative.rounded-3xl.border .border-zinc-800 {
+  border-color: rgba(99, 102, 241, 0.25) !important;
+  transition: border-color 0.6s ease;
+}
+
+.night-mode-active .relative.rounded-3xl.border:hover .border-zinc-800,
+.night-mode-active .relative.rounded-3xl.border:hover .group-hover\:border-red-500\/60 {
+  border-color: rgba(129, 140, 248, 0.75) !important;
+}
+
+/* Dynamic radial flare translation inside interactive cards */
+.night-mode-active .relative.rounded-3xl.border .blur-2xl {
+  background-image: radial-gradient(circle, rgba(99, 102, 241, 0.35) 0%, rgba(99, 102, 241, 0) 70%) !important;
+}
+
+/* Isometric Map outer panel shift under Night Mode */
+.night-mode-active .bg-neutral-950.border {
+  background-color: #030308 !important;
+  border-color: rgba(99, 102, 241, 0.12) !important;
+  box-shadow: 
+    inset 0 0 40px rgba(99, 102, 241, 0.03), 
+    0 10px 30px rgba(0, 0, 0, 0.85) !important;
+  transition: all 0.6s ease;
+}
+
+.night-mode-active .city-grid-dashboard > .bg-zinc-900 {
+  background-color: #050510 !important;
+  border-color: rgba(99, 102, 241, 0.12) !important;
+  transition: all 0.6s ease;
+}
+
+.night-mode-active .city-grid-dashboard .bg-zinc-950 {
+  background-color: #020206 !important;
+  border-color: rgba(99, 102, 241, 0.08) !important;
+  transition: all 0.6s ease;
+}
+
+/* Underworld Syndicate Neon Flicker & Atmospheric Animations */
+@keyframes neon-flicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+    text-shadow: 0 0 4px rgba(239, 68, 68, 0.7), 0 0 14px rgba(239, 68, 68, 0.5), 0 0 35px rgba(239, 68, 68, 0.35);
+    color: #ffffff;
+  }
+  20%, 24%, 55% {
+    text-shadow: 0 0 2px rgba(239, 68, 68, 0.2);
+    color: #e4e4e7;
+  }
+}
+
+@keyframes golden-flicker {
+  0%, 14%, 16%, 18%, 20%, 64%, 66%, 100% {
+    text-shadow: 0 0 4px rgba(245, 158, 11, 0.85), 0 0 15px rgba(245, 158, 11, 0.6);
+  }
+  15%, 19%, 65% {
+    text-shadow: 0 0 2px rgba(245, 158, 11, 0.25);
+  }
+}
+
+@keyframes bullet-pulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.5);
+  }
+  50% {
+    transform: scale(1.025);
+    box-shadow: 0 0 12px 3px rgba(220, 38, 38, 0.25);
+  }
+}
+
+@keyframes slow-smoke {
+  0% {
+    transform: translateY(30px) scale(0.95);
+    opacity: 0;
+  }
+  25% {
+    opacity: 0.15;
+  }
+  75% {
+    opacity: 0.15;
+  }
+  100% {
+    transform: translateY(-90px) scale(1.08);
+    opacity: 0;
+  }
+}
+
+.anim-neon-flicker {
+  animation: neon-flicker 5s infinite;
+}
+
+.anim-golden-flicker {
+  animation: golden-flicker 4s infinite;
+}
+
+.anim-bullet-pulse {
+  animation: bullet-pulse 2s infinite ease-in-out;
+}
+
+.anim-slow-smoke {
+  animation: slow-smoke 12s infinite linear;
+}
+
+/* Custom slide-in animations for enhanced mobile view transitions */
+@keyframes slide-from-right {
+  0% {
+    transform: translateX(35px);
+    opacity: 0.2;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-from-left {
+  0% {
+    transform: translateX(-35px);
+    opacity: 0.2;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.animate-shake-danger {
+  animation: shake-danger 0.6s ease-in-out infinite;
+}
+
+@keyframes shake-danger {
+  0% { transform: translateX(0); }
+  20% { transform: translateX(-2px) rotate(-1deg); }
+  40% { transform: translateX(2px) rotate(1deg); }
+  60% { transform: translateX(-2px) rotate(-1deg); }
+  80% { transform: translateX(2px) rotate(1deg); }
+  100% { transform: translateX(0); }
+}
+
+@media (max-width: 1023px) {
+  .animate-slide-from-right {
+    animation: slide-from-right 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .animate-slide-from-left {
+    animation: slide-from-left 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+}
+
+/* INDUSTRIAL SKEUOMORPHIC UI & DIORAMA STYLES */
+
+.industrial-panel {
+  background: linear-gradient(145deg, #2b2b30 0%, #1f1f23 45%, #18181c 100%);
+  border: 1px solid #3f3f46;
+  border-bottom-width: 4px;
+  border-bottom-color: #121214;
+  box-shadow: 
+    inset 0 1px 1px rgba(255,255,255,0.08), 
+    inset 0 -2px 10px rgba(0,0,0,0.6), 
+    0 15px 25px -5px rgba(0,0,0,0.9),
+    0 4px 6px -2px rgba(0,0,0,0.8);
+  position: relative;
+  border-radius: 1rem;
+}
+
+/* Brushed metal texture overlay */
+.industrial-panel::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-image: 
+    repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(255,255,255,0.015) 2px, rgba(255,255,255,0.015) 4px),
+    repeating-linear-gradient(-45deg, transparent, transparent 2px, rgba(0,0,0,0.015) 2px, rgba(0,0,0,0.015) 4px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Screws in corners ! */
+.industrial-screw {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: radial-gradient(circle, #52525b, #18181b);
+  border-radius: 50%;
+  box-shadow: inset 0 1px 1px rgba(255,255,255,0.4), 0 1px 2px rgba(0,0,0,0.9);
+  z-index: 2;
+}
+
+.industrial-screw::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 15%;
+  right: 15%;
+  height: 1.5px;
+  background: rgba(0,0,0,0.8);
+  transform: translateY(-50%) rotate(45deg);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.2);
+}
+
+.industrial-screw-tl { top: 12px; left: 12px; }
+.industrial-screw-tr { top: 12px; right: 12px; transform: rotate(30deg); }
+.industrial-screw-bl { bottom: 12px; left: 12px; transform: rotate(70deg); }
+.industrial-screw-br { bottom: 12px; right: 12px; transform: rotate(110deg); }
+
+/* Buttons with tactile thickness */
+.industrial-btn {
+  background: linear-gradient(180deg, #3f3f46 0%, #27272a 100%);
+  border: 1px solid #18181b;
+  box-shadow: 
+    inset 0 1px 1px rgba(255,255,255,0.15),
+    0 4px 0 #18181b,
+    0 6px 10px rgba(0,0,0,0.5);
+  border-radius: 0.5rem;
+  transition: all 0.1s ease;
+  position: relative;
+  overflow: hidden;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  transform: translateY(0);
+}
+
+.industrial-btn:active, .industrial-btn-active {
+  transform: translateY(4px);
+  box-shadow: 
+    inset 0 1px 3px rgba(0,0,0,0.5),
+    0 0px 0 #18181b,
+    0 2px 4px rgba(0,0,0,0.5);
+}
+
+/* Neon Text Utilities */
+.neon-text-pink {
+  text-shadow: 0 0 8px rgba(236,72,153,0.8), 0 0 16px rgba(236,72,153,0.4);
+  color: #fbcfe8;
+}
+.neon-text-green {
+  text-shadow: 0 0 8px rgba(16,185,129,0.8), 0 0 16px rgba(16,185,129,0.4);
+  color: #a7f3d0;
+}
+.neon-text-blue {
+  text-shadow: 0 0 8px rgba(56,189,248,0.8), 0 0 16px rgba(56,189,248,0.4);
+  color: #bae6fd;
+}
+.neon-text-amber {
+  text-shadow: 0 0 8px rgba(245,158,11,0.8), 0 0 16px rgba(245,158,11,0.4);
+  color: #fde68a;
+}
+
+/* Tilt-Shift / Isometric Container */
+.diorama-container {
+  transform: perspective(1200px) rotateX(15deg) rotateY(-5deg) scale(0.98);
+  transform-style: preserve-3d;
+  box-shadow: 
+    -20px 30px 40px -10px rgba(0,0,0,0.8),
+    0 10px 15px -5px rgba(0,0,0,0.6);
+  border-radius: 1.5rem;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.diorama-container:hover {
+  transform: perspective(1200px) rotateX(10deg) rotateY(-2deg) scale(1.0);
+}
+
+.tilt-shift-fx {
+  position: relative;
+}
+.tilt-shift-fx::before,
+.tilt-shift-fx::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  pointer-events: none;
+  z-index: 50;
+  backdrop-filter: blur(2px);
+}
+.tilt-shift-fx::before {
+  top: 0; height: 10%;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 0%, transparent 100%);
+}
+.tilt-shift-fx::after {
+  bottom: 0; height: 10%;
+  background: linear-gradient(to top, rgba(0,0,0,0.3) 0%, transparent 100%);
+  mask-image: linear-gradient(to top, black 0%, transparent 100%);
+}

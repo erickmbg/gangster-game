@@ -1,0 +1,92 @@
+68:  heat: 0,
+672:        // Decay active police interest (Heat Wanted)
+674:        const currentHeat = isImmune ? 0 : (prev.heat ?? 0);
+675:        let nextHeat = isImmune ? 0 : Math.max(0, currentHeat - 2.0); // decrease heat passively over time
+681:          const taxHeatIncrease = Math.min(18, Math.max(3, Math.floor(Math.log10(unpaidTaxes) * 1.8)));
+682:          nextHeat = Math.min(100, currentHeat + taxHeatIncrease);
+715:          heat: nextHeat,
+1056:    let addedHeat = isImmune
+1061:    if ((isSurveilled || (player.taxDebt !== undefined && player.taxDebt > 0)) && !isImmune) addedHeat *= 2;
+1124:            heat: Math.min(100, (prev.heat ?? 0) + addedHeat)
+1135:          heat: Math.min(100, (prev.heat ?? 0) + addedHeat)
+1140:          `Solo Crime Failure: ${crime.nameEn}! Spotted sirens, escaping shortly. Wasted ${crime.energyCost} Energy and heat increased.`,
+1141:          `Fracasso no crime: ${crime.namePt}! Avistou sirens no beco e fugiu rápido. Perdeu ${crime.energyCost} de energia. Heat aumentado.`,
+1148:          heat: Math.min(100, (prev.heat ?? 0) + addedHeat)
+1158:        const currentHeat = curr.heat ?? 0;
+1159:        if (currentHeat < 12) return curr;
+1161:        // Trigger likelihood based on active heat levels (up to 33% at max heat)
+1162:        const encounterChance = currentHeat * 0.33;
+1165:          const isSweep = Math.random() < 0.35 || currentHeat > 60;
+1200:    let addedHeat = isImmune
+1205:    if ((isSurveilled || (player.taxDebt !== undefined && player.taxDebt > 0)) && !isImmune) addedHeat *= 2;
+1268:            heat: Math.min(100, (prev.heat ?? 0) + addedHeat)
+1280:          heat: Math.min(100, (prev.heat ?? 0) + addedHeat)
+1286:          `Organized Heist FAIL: ${heist.nameEn}! Team was ambushed. Health drops by 12% from combat injuries and heat soared.`,
+1297:          heat: Math.min(100, (prev.heat ?? 0) + addedHeat)
+1307:        const currentHeat = curr.heat ?? 0;
+1308:        if (currentHeat < 12) return curr;
+1310:        // Trigger likelihood based on active heat levels (up to 33% at max heat)
+1311:        const encounterChance = currentHeat * 0.33;
+1314:          const isSweep = Math.random() < 0.35 || currentHeat > 60;
+1518:      let nextHeat = isImmune ? 0 : (prev.heat !== undefined ? prev.heat : 0);
+1539:        if (drugDef.effects.heat !== undefined) {
+1540:          nextHeat = isImmune ? 0 : Math.min(100, Math.max(0, nextHeat + drugDef.effects.heat));
+1565:        heat: nextHeat,
+1848:        heat: 0,
+1893:  const handleBribePolice = (cost: number, heatCleared: number) => {
+1896:      const currentHeat = prev.heat ?? 0;
+1900:        heat: Math.max(0, currentHeat - heatCleared),
+1907:      `Bribed Lafayette Precinct Deputy with $${cost.toLocaleString()} to wipe files. Reduced police heat by -${heatCleared}%.`,
+1908:      `Molhou a mão do Delegado da Lafayette com $${cost.toLocaleString()} para limpar registros. Procurado reduzido em -${heatCleared}%.`,
+1913:    triggerAlert(lang === "en" ? `NYPD files purged successfully! Heat level cooled down by -${heatCleared}%.` : `Registros policiais eliminados com sucesso! Nível de procurado reduzido em -${heatCleared}%.`);
+1927:      let addedHeat = isImmune ? 0 : Math.max(2, Math.round(energyCost * 0.6));
+1928:      if ((isSurveilled || (prev.taxDebt !== undefined && prev.taxDebt > 0)) && !isImmune) addedHeat *= 2;
+1989:          heat: Math.min(100, (prev.heat ?? 0) + addedHeat)
+2004:        heat: Math.min(100, (prev.heat ?? 0) + addedHeat)
+2870:                  <span className="text-blue-400 font-black shrink-0">HEAT -45%</span>
+3728:                    const isHighHeat = player && player.heat > 70 && !(player.policeImmuneUntil && player.policeImmuneUntil > Date.now());
+3733:                          isHighHeat 
+3738:                          isHighHeat 
+3739:                            ? (lang === "en" ? "🚨 SWAT RAID IMMINENT RISK! Lower wanted heat level immediately!" : "🚨 RISCO IMINENTE DE INVASÃO DA SWAT! Reduza seu nível de procurado imediatamente!") 
+3744:                          {isHighHeat ? (
+3750:                            {isHighHeat 
+3756:                        {isHighHeat ? (
+4036:                      {player.heat}% {lang === "en" ? "Wanted" : "Procurado"}
+4079:                                heat: Math.max(0, (p.heat ?? 0) - 20),
+4086:                              `Slipped away! Low bribe of $${cost.toLocaleString()} was accepted by greedy patrol officers. Heat cooled.`,
+4100:                                heat: 0,
+4156:                                heat: Math.max(0, (p.heat ?? 0) - 40),
+4163:                              `Bribery Escaped! Handed $${cost.toLocaleString()} mid-tier payoff to officers. Heat cooled.`,
+4177:                                heat: 0,
+4233:                                heat: Math.max(0, (p.heat ?? 0) - 75),
+4254:                                heat: 0,
+4349:                                  heat: Math.max(0, (p.heat ?? 0) - 25),
+4377:                                  heat: Math.min(100, (p.heat ?? 0) + 15),
+4865:                          ? "Rebuilds facial layout. Instantly resets Wanted/Heat level to 0% and grants 2 Minutes of Police Immunity!" 
+4866:                          : "Reconstrói simetria facial. Zera nível de procurado (Heat) e concede 2 minutos de imunidade policial total!"}
+4936:          const currentHeat = player.heat ?? 0;
+4937:          const hasHeat = currentHeat > 0;
+4940:          const fullClearnessCost = Math.max(2500, player.level * 850 + Math.round(currentHeat * 150));
+4976:                {/* Heat level analysis board */}
+4982:                    <span className={`font-black uppercase text-[9px] px-1.5 py-0.5 rounded ${currentHeat > 50 ? "bg-red-500/20 text-red-400 animate-pulse" : "bg-zinc-900 border border-zinc-850 text-zinc-400"}`}>
+4983:                      {currentHeat > 50 ? (lang === "en" ? "SWAT Sweep Threat" : "Risco de Invasão") : (lang === "en" ? "Stable" : "Sob Controle")}
+4991:                        style={{ width: `${Math.min(100, currentHeat)}%` }}
+4997:                      {Math.round(currentHeat)}%
+5015:                        ? "Grease the local captain's palms. Purges tactical records and reduces current Heat by 40% immediately."
+5021:                      disabled={player.cash < bribeCost || !hasHeat}
+5026:                        : !hasHeat
+5044:                        ? "Wipe ALL suspect folders entirely from precinct archive. Reduces Heat Wanted level to absolute 0%!"
+5050:                      disabled={player.cash < fullClearnessCost || !hasHeat}
+5055:                        : !hasHeat
+5328:            tooltipEn: "Police surveillance active after rejected bribe. Crimes generate double heat.",
+5360:        if ((player.heat ?? 0) > 60) {
+5370:        } else if ((player.heat ?? 0) > 10) {
+5372:            id: "heat",
+5377:            tooltipEn: "Under surveillance. Low profile recommended to allow heat decay.",
+5504:                } else if ((player.heat ?? 0) > 60) {
+5688:                    title={isImmune ? (lang === "en" ? `Police Immunity: ${timerStr} left` : `Imunidade Policial: restam ${timerStr}`) : isSurveilled ? (lang === "en" ? `Police Surveillance: ${sTimerStr} left` : `Vigilância Policial: restam ${sTimerStr}`) : (lang === "en" ? `Wanted level: ${Math.round(player.heat)}%` : `Nível de Procurado: ${Math.round(player.heat)}%`)}
+5695:                      ) : player.heat > 10 ? (
+5714:                        style={{ width: `${isImmune || isSurveilled ? 100 : Math.min(100, player.heat)}%` }} 
+5721:                      {isImmune ? timerStr : isSurveilled ? sTimerStr : `${Math.round(player.heat)}%`}
+5973:                        <span className="text-zinc-500">🚨 {lang === "en" ? "WANTED HEAT" : "POLÍCIA"}:</span>
+5974:                        <span className={`font-black ${player.heat > 50 ? "text-rose-500 animate-pulse" : "text-yellow-500"}`}>{player.heat}%</span>
